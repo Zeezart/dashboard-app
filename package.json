@@ -20,16 +20,24 @@
   "dependencies": {
     "@emotion/react": "11.11.3",
     "@emotion/styled": "^11.11.5",
-    "@hookform/resolvers": "^3.3.1",
+    "@hookform/resolvers": "^3.9.1",
     "@mui/icons-material": "5.16.13",
     "@mui/material": "5.16.13",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.47.10",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.10",
     "next": "^14.0.1",
+    "next-themes": "^0.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.46.2",
-    "react-icons": "^4.10.1",
-    "zod": "^3.22.4"
+    "react-hook-form": "^7.54.2",
+    "react-icons": "^4.12.0",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",
