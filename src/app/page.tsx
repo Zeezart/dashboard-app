@@ -1,6 +1,6 @@
 'use client';
 
-import { PaletteMode } from '@mui/material';
+import { CssBaseline, PaletteMode } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -27,6 +27,7 @@ export default function LandingPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <Hero />
       <Box sx={{ bgcolor: 'background.default' }}>

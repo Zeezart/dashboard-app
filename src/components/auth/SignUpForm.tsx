@@ -16,7 +16,6 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -46,8 +45,6 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function SignUp() {
-  const router = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -62,34 +59,28 @@ export default function SignUp() {
 
   const [isPending, startTransition] = useTransition();
 
-  const password = watch('password');
+  const password = watch('password'); // Watch password input
 
   async function onSubmit(data: FormData) {
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    const { confirm_password, terms, ...payload } = data;
+
     startTransition(async () => {
-      const result = await signUpWithEmailAndPassword({
-        ...data,
-        role: 'user',
-      });
-      const parsedResult = JSON.parse(result);
-
-      toast.success(result);
-
-      if (parsedResult.error?.status) {
-        // Handle specific error cases
-        switch (parsedResult.error.status) {
-          case 409:
-            toast.error('Email is already registered. Please sign in.');
-            break;
-          case 500:
-            toast.error('Internal server error. Please try again later.');
-            break;
-          default:
-            toast.error('An unknown error occurred.');
+      try {
+        const result = await signUpWithEmailAndPassword(payload);
+        if (typeof result !== 'string') {
+          throw new Error('Unexpected result type');
         }
-      } else {
-        // Success case
-        toast.success('Account created successfully!');
-        router.push('/sign-in');
+
+        // Assuming result contains useful information
+        toast.success('Signup successful!');
+      } catch (e) {
+        // Handle and display error from Supabase
+        toast.error(
+          e instanceof Error
+            ? e.message
+            : 'An error occurred during signup. Please try again.'
+        );
       }
     });
   }

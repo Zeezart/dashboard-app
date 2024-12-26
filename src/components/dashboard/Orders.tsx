@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -78,7 +79,8 @@ export default function Orders() {
             <TableCell>Name</TableCell>
             <TableCell>Ship To</TableCell>
             <TableCell>Payment Method</TableCell>
-            <TableCell align='right'>Sale Amount</TableCell>
+            <TableCell>Sale Amount</TableCell>
+            <TableCell align='right'>Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -88,7 +90,10 @@ export default function Orders() {
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align='right'>{`$${row.amount}`}</TableCell>
+              <TableCell>{`$${row.amount}`}</TableCell>
+              <TableCell align='right'>
+                <Button variant='contained'>Action</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

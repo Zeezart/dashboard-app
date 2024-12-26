@@ -11,6 +11,11 @@ export default async function Layout({ children }: { children: ReactNode }) {
     return redirect('/sign-in');
   }
 
+  // Mendapatkan role dari metadata
+  // const userRole = userSession.session.user?.user_metadata?.role;
+
+  // console.log(userSession.session.user.user_metadata);
+
   useUserStore.setState({ user: userSession.session.user });
 
   return <>{children}</>;

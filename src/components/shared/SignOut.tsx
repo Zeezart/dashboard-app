@@ -21,10 +21,10 @@ export default function SignOut() {
   };
 
   return (
-    <div className='flex px-2 w-full'>
+    <div className='flex w-full'>
       <Button
         startIcon={<Logout />}
-        className='w-full flex items-center justify-center'
+        className='w-full gap-6 flex items-center justify-start'
         onClick={handleSignOut}
         disabled={isPending}
       >
