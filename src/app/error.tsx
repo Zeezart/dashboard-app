@@ -4,7 +4,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import { Box, Button } from '@mui/material';
 import * as React from 'react';
 
-import { consoleLog } from '@/utils/shared/console-log';
+// import { consoleLog } from '@/utils/shared/console-log';
 
 export default function Error({
   error,
@@ -13,9 +13,9 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  React.useEffect(() => {
-    consoleLog('error.tsx', error);
-  }, [error]);
+  // React.useEffect(() => {
+  //   console.log('error.tsx', error);
+  // }, [error]);
 
   return (
     <main>
@@ -28,7 +28,7 @@ export default function Error({
           <Box sx={{ m: 5 }}>
             <Button onClick={reset}>Try again</Button>
           </Box>
-          <a href='/?slug=homepage'>Back to home</a>
+          <a href='/'>Back to home</a>
         </Box>
       </section>
     </main>

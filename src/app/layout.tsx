@@ -1,9 +1,9 @@
-import { Container } from '@mui/material';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { Metadata } from 'next';
 import * as React from 'react';
+import { Toaster } from 'react-hot-toast';
 
-import { SITE_CONFIG } from '@/constants';
+import { SITE_CONFIG } from '@/constants/config';
 import { GLOBAL_STYLES } from '@/styles';
 
 // !STARTERCONF Change these default meta
@@ -54,7 +54,11 @@ export default function RootLayout({
     <html lang='en'>
       <GlobalStyles styles={GLOBAL_STYLES} />
       <body>
-        <Container sx={{ pl: 0, pr: 0 }}>{children}</Container>
+        <Toaster />
+        {/* <Container sx={{ pl: 0, pr: 0 }}> */}
+        {children}
+
+        {/* </Container> */}
       </body>
     </html>
   );

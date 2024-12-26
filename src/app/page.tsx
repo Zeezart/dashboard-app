@@ -7,15 +7,15 @@ import Divider from '@mui/material/Divider';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 
-import AppAppBar from '@/components/AppAppBar';
-import FAQ from '@/components/FAQ';
-import Features from '@/components/Features';
-import Footer from '@/components/Footer';
-import Hero from '@/components/Hero';
-import Highlights from '@/components/Highlights';
-import LogoCollection from '@/components/LogoCollection';
-import Pricing from '@/components/Pricing';
-import Testimonials from '@/components/Testimonials';
+import AppAppBar from '@/components/landing-page/AppAppBar';
+import FAQ from '@/components/landing-page/FAQ';
+import Features from '@/components/landing-page/Features';
+import Footer from '@/components/landing-page/Footer';
+import Hero from '@/components/landing-page/Hero';
+import Highlights from '@/components/landing-page/Highlights';
+import LogoCollection from '@/components/landing-page/LogoCollection';
+import Pricing from '@/components/landing-page/Pricing';
+import Testimonials from '@/components/landing-page/Testimonials';
 
 export default function LandingPage() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
