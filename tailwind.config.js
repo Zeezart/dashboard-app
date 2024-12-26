@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'], // Sesuaikan dengan struktur folder proyekmu
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [
-    require('tailwindcss-animate'), // Plugin tambahan yang sudah ada di dependensi
-  ],
+  plugins: [require('tailwindcss-animate')],
 };

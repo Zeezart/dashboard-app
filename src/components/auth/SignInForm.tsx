@@ -1,8 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import SyncIcon from '@mui/icons-material/Sync';
+import { IconButton, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,7 +14,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as z from 'zod';
@@ -32,6 +34,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function SignInForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -124,12 +128,25 @@ export default function SignInForm() {
             required
             fullWidth
             label='Password'
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             id='password'
             autoComplete='current-password'
             error={!!errors.password}
             helperText={errors.password?.message}
             {...register('password')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    edge='end'
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Button
             type='submit'

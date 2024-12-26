@@ -50,8 +50,7 @@ export async function loginWithEmailAndPassword(data: {
 export async function signUpWithEmailAndPassword(data: {
   email: string;
   password: string;
-  last_name: string;
-  first_name: string;
+  full_name: string;
   role: string;
 }) {
   const supabase = await createSupbaseServerClient();
@@ -74,8 +73,7 @@ export async function signUpWithEmailAndPassword(data: {
         .insert([
           {
             id: session.user.id,
-            first_name: data.first_name,
-            last_name: data.last_name,
+            first_name: data.full_name,
             role: data.role,
           },
         ]);

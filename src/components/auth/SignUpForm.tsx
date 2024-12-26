@@ -1,8 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import SyncIcon from '@mui/icons-material/Sync';
+import { IconButton, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,7 +17,7 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as z from 'zod';
@@ -26,12 +28,9 @@ import { signUpWithEmailAndPassword } from '@/app/(auth)/actions';
 
 // Zod schema
 const schema = z.object({
-  first_name: z
+  full_name: z
     .string()
-    .min(2, { message: 'First name must be at least 2 characters' }),
-  last_name: z
-    .string()
-    .min(2, { message: 'Last name must be at least 2 characters' }),
+    .min(4, { message: 'Your name must be at least 4 characters' }),
   email: z.string().email({ message: 'Invalid email address' }),
   password: z
     .string()
@@ -39,21 +38,31 @@ const schema = z.object({
   terms: z.literal(true, {
     message: 'You must agree to the terms and conditions',
   }),
+  confirm_password: z
+    .string()
+    .min(6, { message: 'Confirm Password must match Password' }),
 });
 
 type FormData = z.infer<typeof schema>;
 
 export default function SignUp() {
   const router = useRouter();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   const [isPending, startTransition] = useTransition();
+
+  const password = watch('password');
 
   async function onSubmit(data: FormData) {
     startTransition(async () => {
@@ -109,31 +118,20 @@ export default function SignUp() {
           sx={{ mt: 3 }}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete='given-name'
                 required
                 fullWidth
-                id='first_name'
-                label='First Name'
+                id='full_name'
+                label='Full Name'
                 autoFocus
-                error={!!errors.first_name}
-                helperText={errors.first_name?.message}
-                {...register('first_name')}
+                error={!!errors.full_name}
+                helperText={errors.full_name?.message}
+                {...register('full_name')}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id='last_name'
-                label='Last Name'
-                autoComplete='family-name'
-                error={!!errors.last_name}
-                helperText={errors.last_name?.message}
-                {...register('last_name')}
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 required
@@ -146,19 +144,72 @@ export default function SignUp() {
                 {...register('email')}
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
                 label='Password'
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 id='password'
                 autoComplete='new-password'
                 error={!!errors.password}
                 helperText={errors.password?.message}
                 {...register('password')}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle password visibility'
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        edge='end'
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                label='Confirm Password'
+                type={showConfirmPassword ? 'text' : 'password'}
+                id='confirm_password'
+                autoComplete='confirm-password'
+                error={!!errors.confirm_password}
+                helperText={
+                  errors.confirm_password
+                    ? errors.confirm_password.message
+                    : password !== watch('confirm_password') &&
+                      'Passwords do not match'
+                }
+                {...register('confirm_password', {
+                  validate: (value) =>
+                    value === password || 'Passwords do not match',
+                })}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle confirm password visibility'
+                        onClick={() => setShowConfirmPassword((prev) => !prev)}
+                        edge='end'
+                      >
+                        {showConfirmPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox color='primary' {...register('terms')} />}
