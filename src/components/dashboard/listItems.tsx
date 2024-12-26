@@ -1,6 +1,6 @@
-import { AccountBox } from '@mui/icons-material';
 import BookIcon from '@mui/icons-material/Book';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { ListItem } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -27,18 +27,8 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <AccountBox />
-      </ListItemIcon>
-      <ListItemText primary='Profile' />
-    </ListItemButton>
-    {/* <ListItemButton> */}
-    <SignOut />
-    {/* <ListItemIcon>
-        <Logout />
-      </ListItemIcon>
-      <ListItemText primary='Log Out' /> */}
-    {/* </ListItemButton> */}
+    <ListItem>
+      <SignOut />
+    </ListItem>
   </React.Fragment>
 );

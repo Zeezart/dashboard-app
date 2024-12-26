@@ -1,7 +1,10 @@
+import { CssBaseline } from '@mui/material';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { Metadata } from 'next';
 import * as React from 'react';
 import { Toaster } from 'react-hot-toast';
+
+import '../styles/globals.css';
 
 import { SITE_CONFIG } from '@/constants/config';
 import { GLOBAL_STYLES } from '@/styles';
@@ -53,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <GlobalStyles styles={GLOBAL_STYLES} />
+      <CssBaseline />
       <body>
         <Toaster />
         {/* <Container sx={{ pl: 0, pr: 0 }}> */}

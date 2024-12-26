@@ -2,9 +2,7 @@
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -130,11 +128,6 @@ export default function Dashboard() {
           >
             Dashboard
           </Typography>
-          <IconButton color='inherit'>
-            <Badge badgeContent={4} color='secondary'>
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant='permanent' open={open}>
@@ -179,6 +172,7 @@ export default function Dashboard() {
               <Orders />
             </Paper>
           </Grid>
+
           {/* </Grid> */}
           <Copyright sx={{ pt: 4 }} />
         </Container>

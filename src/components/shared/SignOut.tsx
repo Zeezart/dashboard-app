@@ -1,25 +1,35 @@
+import { Logout } from '@mui/icons-material';
 import SyncIcon from '@mui/icons-material/Sync';
 import { Button } from '@mui/material';
 import React, { useTransition } from 'react';
-
-import { cn } from '@/lib/utils';
+import toast from 'react-hot-toast';
 
 import { logout } from '@/app/(auth)/actions';
 
 export default function SignOut() {
   const [isPending, startTransition] = useTransition();
-  const onSubmit = async () => {
+
+  const handleSignOut = () => {
     startTransition(async () => {
-      await logout();
+      try {
+        await logout();
+        toast.success('You have been logged out.');
+      } catch (error) {
+        toast.error('Failed to log out.');
+      }
     });
   };
 
   return (
-    <form action={onSubmit}>
-      <Button className='w-full flex items-center justify-center'>
-        SignOut{' '}
-        <SyncIcon className={cn(' animate-spin', { hidden: !isPending })} />
+    <div className='flex px-2 w-full'>
+      <Button
+        startIcon={<Logout />}
+        className='w-full flex items-center justify-center'
+        onClick={handleSignOut}
+        disabled={isPending}
+      >
+        SignOut {isPending && <SyncIcon className='animate-spin' />}
       </Button>
-    </form>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use server';
 
 import { redirect } from 'next/navigation';
@@ -10,8 +11,40 @@ export async function loginWithEmailAndPassword(data: {
 }) {
   const supabase = await createSupbaseServerClient();
 
+  // Login dengan email dan password
   const result = await supabase.auth.signInWithPassword(data);
-  return JSON.stringify(result);
+
+  // Cek jika ada error dalam result
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  const user = result.data.user;
+
+  // Jika login berhasil dan user belum ada di profile, insert ke profile
+  if (user) {
+    // Cek jika user sudah ada di tabel profile
+    const { data: profileData, error: profileError } = await supabase
+      .from('profile')
+      .select('id')
+      .eq('id', user.id)
+      .single();
+
+    if (!profileData && !profileError) {
+      // Jika user belum ada di profile, insert data baru
+      await supabase.from('profile').insert([
+        {
+          id: user.id, // ID pengguna yang sudah login
+          first_name: user.user_metadata?.first_name || '', // Ambil nama depan dari metadata
+          last_name: user.user_metadata?.last_name || '', // Ambil nama belakang dari metadata
+          role: 'user', // Atur role sesuai kebutuhan
+        },
+      ]);
+    }
+  }
+
+  // Kembalikan hasil dalam format JSON string
+  return JSON.stringify(result); // pastikan hasilnya dalam format string
 }
 
 export async function signUpWithEmailAndPassword(data: {
@@ -19,46 +52,48 @@ export async function signUpWithEmailAndPassword(data: {
   password: string;
   last_name: string;
   first_name: string;
+  role: string;
 }) {
   const supabase = await createSupbaseServerClient();
 
-  // Sign up the user
-  const { data: user, error: authError } = await supabase.auth.signUp({
+  // Daftarkan user dengan email dan password
+  const result = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
-    options: {
-      data: {
-        last_name: data.last_name,
-        first_name: data.first_name,
-        role: 'user',
-      },
-    },
   });
 
-  if (authError) {
-    return JSON.stringify({ error: authError });
+  // Cek jika ada error dalam result
+  if (result.error) {
+    throw new Error(result.error.message);
   }
 
-  // Insert user details into the 'member' table
-  // const { data: memberData, error: memberError } = await supabase
-  //   .from('member')
-  //   .insert([
-  //     {
-  //       email: data.email,
-  //       first_name: data.first_name,
-  //       last_name: data.last_name,
-  //     },
-  //   ]);
+  supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
+      const { data: insertData, error } = await supabase
+        .from('profile')
+        .insert([
+          {
+            id: session.user.id,
+            first_name: data.first_name,
+            last_name: data.last_name,
+            role: data.role,
+          },
+        ]);
 
-  // if (memberError) {
-  //   return JSON.stringify({ error: memberError });
-  // }
+      if (error) {
+        console.error('Error inserting data:', error);
+      } else {
+        console.log('Data inserted successfully:', insertData);
+      }
+    }
+  });
 
-  return JSON.stringify({ user });
+  // Kembalikan hasil dalam format JSON string
+  return JSON.stringify(result); // pastikan hasilnya dalam format string
 }
 
 export async function logout() {
   const supabase = await createSupbaseServerClient();
   await supabase.auth.signOut();
-  redirect('/sign-up');
+  redirect('/sign-in');
 }
