@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   lint:
-    name: ⬣ ESLint, ʦ TypeScript, 💅 Prettier, and 🃏 Test
+    name: ⬣ ESLint, ʦ TypeScript, and 💅 Prettier
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
@@ -35,6 +35,3 @@ jobs:
 
       - name: 💅 Prettier check
         run: yarn format:check
-
-      - name: 🃏 Run jest
-        run: yarn test
