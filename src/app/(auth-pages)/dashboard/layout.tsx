@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 
 import { readUserSession } from '@/lib/actions';
 import { useUserStore } from '@/lib/store/user';
+import { createSupbaseClient } from '@/lib/supabase';
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const { data: userSession } = await readUserSession();
@@ -11,12 +12,18 @@ export default async function Layout({ children }: { children: ReactNode }) {
     return redirect('/sign-in');
   }
 
-  // Mendapatkan role dari metadata
-  // const userRole = userSession.session.user?.user_metadata?.role;
-
-  // console.log(userSession.session.user.user_metadata);
+  const supabaseClient = await createSupbaseClient();
+  const { data: user } = await supabaseClient
+    .from('permissions')
+    .select('*')
+    .single();
 
   useUserStore.setState({ user: userSession.session.user });
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <pre>{JSON.stringify(user, null, 2)}</pre>
+    </>
+  );
 }

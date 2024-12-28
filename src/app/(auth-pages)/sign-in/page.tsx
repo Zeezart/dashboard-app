@@ -11,6 +11,7 @@ export default async function page() {
   if (userSession.session) {
     return redirect('/dashboard');
   }
+
   return (
     <div className='flex items-center justify-center h-screen'>
       <SignInForm />

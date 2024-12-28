@@ -54,15 +54,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <GlobalStyles styles={GLOBAL_STYLES} />
       <CssBaseline />
       <body>
-        <Toaster />
         {/* <Container sx={{ pl: 0, pr: 0 }}> */}
         {children}
 
         {/* </Container> */}
+        <Toaster position='top-center' reverseOrder={false} />
       </body>
     </html>
   );

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 'use server';
 
 import { redirect } from 'next/navigation';
@@ -44,18 +43,6 @@ export async function signUpWithEmailAndPassword(data: {
   if (result.error) {
     throw new Error(result.error.message);
   }
-
-  // // Jika pendaftaran sukses tapi tidak ada sesi, login pengguna
-  // if (!result.data.session) {
-  //   const loginResult = await supabase.auth.signInWithPassword({
-  //     email: data.email,
-  //     password: data.password,
-  //   });
-  //   if (loginResult.error) {
-  //     throw new Error(loginResult.error.message);
-  //   }
-  //   return JSON.stringify(loginResult); // Mengembalikan hasil login
-  // }
 
   return JSON.stringify(result); // Mengembalikan hasil pendaftaran
 }

@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import React, { useTransition } from 'react';
 import toast from 'react-hot-toast';
 
-import { logout } from '@/app/(auth)/actions';
+import { logout } from '@/app/(auth-pages)/actions';
 
 export default function SignOut() {
   const [isPending, startTransition] = useTransition();

@@ -21,7 +21,7 @@ import * as z from 'zod';
 
 import Copyright from '@/components/shared/Copyright';
 
-import { loginWithEmailAndPassword } from '@/app/(auth)/actions';
+import { loginWithEmailAndPassword } from '@/app/(auth-pages)/actions';
 
 // Zod schema
 const schema = z.object({
@@ -89,7 +89,11 @@ export default function SignInForm() {
   }
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container
+      component='div'
+      maxWidth='xs'
+      className='flex flex-col items-center justify-center h-screen'
+    >
       <CssBaseline />
       <Box
         sx={{
@@ -154,6 +158,7 @@ export default function SignInForm() {
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
             endIcon={isPending && <SyncIcon className='animate-spin' />}
+            disabled={isPending}
           >
             Sign In
           </Button>

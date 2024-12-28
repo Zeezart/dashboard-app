@@ -151,7 +151,7 @@ export default function Dashboard() {
         </List>
       </Drawer>
       <Box
-        component='main'
+        component='div'
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === 'light'
