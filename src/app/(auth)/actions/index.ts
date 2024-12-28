@@ -34,6 +34,7 @@ export async function signUpWithEmailAndPassword(data: {
     email: data.email,
     password: data.password,
     options: {
+      emailRedirectTo: `${process.env.NEXT_WEB_PATH}/verify-email`,
       data: {
         full_name: data.full_name,
       },
@@ -44,17 +45,17 @@ export async function signUpWithEmailAndPassword(data: {
     throw new Error(result.error.message);
   }
 
-  // Jika pendaftaran sukses tapi tidak ada sesi, login pengguna
-  if (!result.data.session) {
-    const loginResult = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
-    });
-    if (loginResult.error) {
-      throw new Error(loginResult.error.message);
-    }
-    return JSON.stringify(loginResult); // Mengembalikan hasil login
-  }
+  // // Jika pendaftaran sukses tapi tidak ada sesi, login pengguna
+  // if (!result.data.session) {
+  //   const loginResult = await supabase.auth.signInWithPassword({
+  //     email: data.email,
+  //     password: data.password,
+  //   });
+  //   if (loginResult.error) {
+  //     throw new Error(loginResult.error.message);
+  //   }
+  //   return JSON.stringify(loginResult); // Mengembalikan hasil login
+  // }
 
   return JSON.stringify(result); // Mengembalikan hasil pendaftaran
 }
