@@ -27,6 +27,9 @@ export default async function BooksListPage() {
 
   return (
     <>
+      <Typography variant='h4' gutterBottom>
+        All Books
+      </Typography>
       {/* Add Book Button for Admin */}
       {role === 'admin' && (
         <Box display='flex' justifyContent='flex-end' padding={2}>

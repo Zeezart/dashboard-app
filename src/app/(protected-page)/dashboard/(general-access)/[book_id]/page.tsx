@@ -1,8 +1,8 @@
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import { Button, CardContent, CardMedia, Typography } from '@mui/material';
-// import { useState } from 'react';
 import Link from 'next/link';
+
+import AddFavoriteBookButton from '@/components/dashboard/AddFavoriteBookButton';
 
 import { bookDetailById } from '@/app/(protected-page)/actions';
 import NotFound from '@/app/not-found';
@@ -18,14 +18,6 @@ export default async function BookDetailsPage({
   if (!book) {
     return <NotFound />; // If book not found, show 404 page
   }
-
-  // State for favorite button toggle
-  // const [isFavorite, setIsFavorite] = useState(false);
-
-  // const toggleFavorite = () => {
-  //   setIsFavorite((prev) => !prev);
-  //   // You can add functionality here to update the favorite status in your database
-  // };
 
   return (
     <CardContent>
@@ -65,16 +57,7 @@ export default async function BookDetailsPage({
       </Typography>
 
       {/* Favorite Button */}
-      <Button
-        startIcon={<BookmarkBorderIcon />}
-        // <BookmarkAddedIcon />
-        variant='contained'
-        color='primary'
-        // color={isFavorite ? 'secondary' : 'primary'}
-        // onClick={toggleFavorite}
-      >
-        Add to favorites
-      </Button>
+      <AddFavoriteBookButton book_id={book_id} />
     </CardContent>
   );
 }

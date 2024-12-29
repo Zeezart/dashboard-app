@@ -27,31 +27,37 @@ export default async function AllUsersPage() {
   const users = usersData.data.users;
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Number</TableCell>
-            <TableCell>Full Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>ID</TableCell>
-            <TableCell>Last Sign In</TableCell>
-            <TableCell>Provider</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users?.map((user, index) => (
-            <TableRow key={user.id}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{user.user_metadata.full_name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.id}</TableCell>
-              <TableCell>{user.last_sign_in_at}</TableCell>
-              <TableCell>{user.app_metadata.provider}</TableCell>
+    <>
+      <Typography variant='h4' gutterBottom>
+        All Users Information
+      </Typography>
+
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Number</TableCell>
+              <TableCell>Full Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Last Sign In</TableCell>
+              <TableCell>Provider</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {users?.map((user, index) => (
+              <TableRow key={user.id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{user.user_metadata.full_name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.id}</TableCell>
+                <TableCell>{user.last_sign_in_at}</TableCell>
+                <TableCell>{user.app_metadata.provider}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

@@ -154,3 +154,90 @@ export async function updateBook(
 
   return result;
 }
+
+export async function addFavoriteBook(data: { book_id: string }) {
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
+
+  const result = await supabase.from('favorites').insert({
+    book_id: data.book_id,
+    user_id: (await supabase.auth.getSession()).data.session?.user.id, // Ambil user ID dari sesi
+  });
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}
+
+export async function isFavoriteBook(book_id: string) {
+  const supabase = await createSupabaseClient({
+    readOnly: true,
+    isBrowser: false,
+  });
+
+  const { data, error } = await supabase
+    .from('favorites')
+    .select('*')
+    .eq('book_id', book_id)
+    .single();
+
+  if (error) {
+    // Handle unexpected errors, ignore "no rows found" error
+    return false;
+  }
+
+  return !!data; // Return true if the book is in favorites
+}
+
+export async function readUserFavorites() {
+  const supabase = await createSupabaseClient({
+    readOnly: true,
+    isBrowser: false,
+  });
+
+  const user = await supabase.auth.getUser();
+  const userId = user.data?.user?.id;
+
+  if (!userId) {
+    throw new Error('User is not authenticated');
+  }
+
+  const result = await supabase
+    .from('favorites')
+    .select(
+      `
+      book_id,
+      books (title, author, description)
+    `
+    )
+    .eq('user_id', userId);
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}
+
+// Delete operation for books, requires writable access
+export async function deleteUserFavoriteBook(book_id: string) {
+  const supabase = await createSupabaseClient({
+    readOnly: false,
+    isBrowser: false,
+  });
+
+  const result = await supabase
+    .from('favorites')
+    .delete()
+    .eq('book_id', book_id);
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}
