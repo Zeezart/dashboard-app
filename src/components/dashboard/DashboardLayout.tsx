@@ -1,4 +1,3 @@
-// DashboardLayout.tsx
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -15,28 +14,17 @@ import { Role } from '@/types';
 type DashboardLayoutProps = {
   children: ReactNode;
   role: Role;
-  open: boolean;
-  toggleDrawer: () => void;
 };
 
-const DashboardLayout = ({
-  children,
-  role,
-  open,
-  toggleDrawer,
-}: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, role }: DashboardLayoutProps) => {
   return (
     <Box sx={{ display: 'flex' }}>
-      <DashboardHeader open={open} toggleDrawer={toggleDrawer} />
-      <DashboardSidebar open={open} toggleDrawer={toggleDrawer} role={role} />
+      <DashboardHeader />
+      <DashboardSidebar role={role} />
 
       <Box
         component='div'
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
           overflow: 'auto',
