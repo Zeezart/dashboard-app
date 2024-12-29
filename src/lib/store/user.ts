@@ -1,10 +1,10 @@
-import { User } from '@supabase/supabase-js';
-import { create } from 'zustand';
+// import { User } from '@supabase/supabase-js';
+// import { create } from 'zustand';
 
-interface UserState {
-  user: User | null;
-}
+// interface UserState {
+//   user: User | null;
+// }
 
-export const useUserStore = create<UserState>()((_set) => ({
-  user: null,
-}));
+// export const useUserStore = create<UserState>()((_set) => ({
+//   user: null,
+// }));

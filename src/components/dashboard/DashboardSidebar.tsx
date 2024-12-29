@@ -66,25 +66,25 @@ const DashboardSidebar = ({ open, toggleDrawer, role }: SidebarProps) => {
     {
       label: 'My Books',
       icon: <BookIcon />,
-      link: '/my-books',
+      link: '/dashboard/my-books',
       role: 'user', // Only visible to user role
     },
     {
       label: 'User Order',
       icon: <BookIcon />,
-      link: '/user-order',
+      link: '/dashboard/user-order',
       role: 'admin', // Only visible to admin role
     },
     {
       label: 'All User',
       icon: <VerifiedUser />,
-      link: '/all-user',
+      link: '/dashboard/all-user',
       role: 'admin', // Only visible to admin role
     },
     {
       label: 'My Profile',
       icon: <DashboardIcon />,
-      link: '/my-profile',
+      link: '/dashboard/my-profile',
     },
   ];
 
