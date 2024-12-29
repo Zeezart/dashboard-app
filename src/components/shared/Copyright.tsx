@@ -12,8 +12,8 @@ export default function Copyright(
       {...props}
     >
       {'Copyright © '}
-      <Link color='inherit' href='https://mui.com/'>
-        Your Website
+      <Link color='inherit' href='https://dzakyrifai.vercel.app/'>
+        Buku Online
       </Link>{' '}
       {new Date().getFullYear()}.
     </Typography>

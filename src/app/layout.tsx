@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   authors: [
     {
-      name: 'Alex',
-      url: 'https://hihb.com',
+      name: "Dzaky Purnomo Rifa'i",
+      url: 'https://dzakyrifai.vercel.app/',
     },
   ],
 };
