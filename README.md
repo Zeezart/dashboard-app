@@ -1,3 +1,9 @@
+# To Do
+
+[] Cookies are not deleted after signup.
+[] The verify email callback is not following best practices.
+[] Implementing Supabase Auth Best Practices for Server and Client (Create Action).
+
 # NextJs 14.x + MUI 5.x + React Hook Form + TypeScript Starter and Boilerplate
 
 <div align="center">

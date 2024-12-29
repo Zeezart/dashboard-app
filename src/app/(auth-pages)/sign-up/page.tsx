@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-import { readUserSession } from '@/lib/actions';
-
 import SignUpForm from '@/components/auth/SignUpForm';
+
+import { readUserSession } from '@/app/(protected-page)/actions';
 
 export default async function page() {
   const { data: userSession } = await readUserSession();
