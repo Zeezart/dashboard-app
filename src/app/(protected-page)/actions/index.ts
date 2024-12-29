@@ -86,3 +86,71 @@ export async function bookDetailById(book_id: string): Promise<Book | null> {
 
   return data;
 }
+
+// Delete operation for books, requires writable access
+export async function deleteBook(book_id: string) {
+  const supabase = await createSupabaseClient({
+    readOnly: false,
+    isBrowser: false,
+  });
+
+  const result = await supabase.from('books').delete().eq('book_id', book_id);
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}
+
+export async function addBook(data: {
+  title: string;
+  author: string;
+  description: string;
+}) {
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
+
+  const result = await supabase.from('books').insert({
+    title: data.title,
+    author: data.author,
+    description: data.description,
+  });
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}
+
+export async function updateBook(
+  data: {
+    title: string;
+    author: string;
+    description: string;
+  },
+  book_id: string
+) {
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
+
+  const result = await supabase
+    .from('books')
+    .update({
+      title: data.title,
+      author: data.author,
+      description: data.description,
+    })
+    .eq('book_id', book_id);
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}

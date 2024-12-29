@@ -1,13 +1,14 @@
 # To Do
 
-[] Cookies are not deleted after signup.
-[] The verify email callback is not following best practices.
-[] Implementing Supabase Auth Best Practices for Server and Client (Create Action).
+- [] Signup Cookies are not deleted after signup.
+- [] The verify email callback is not following best practices.
+- [] Implementing Supabase Auth Best Practices for Server and Client (Create Action).
+- [] Fix middleware for checking authentication and authorization (permission/role).
 
-# NextJs 14.x + MUI 5.x + React Hook Form + TypeScript Starter and Boilerplate
+# Mini Project Sistem Dashboard Buku
 
 <div align="center">
-  <h2>2024/2025: 🔋 NextJs 14.x + MUI 5.x + TypeScript Starter</h2>
+  <h2>Next Js 14.x + MUI 5.x + TypeScript 4.x + Tailwind CSS 3.x + Supabase (auth & database) 2.x</h2>
   <p>The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
 
   <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, MUI confirmation dialog, Loading button, Client-side component & React Context update hook</p>
@@ -18,17 +19,10 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 </div>
 
-## Demo
-
-[<img src="https://alexstack.github.io/reactStarter/asset/NextJs14-mui5.gif">](https://mui-nextjs-ts.vercel.app)
-
-🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
-
 ## Features
 
 This repository is 🔋 battery packed with:
 
-- ⚡️ Next.js 14.x with App Router
 - ⚛️ React 18.x
 - ✨ TypeScript
 - 💨 Material UI — Ready to use Material Design components [check here for the usage](https://mui.com/material-ui/getting-started/usage/)
@@ -49,23 +43,13 @@ This repository is 🔋 battery packed with:
 - 🗺 Site Map — Automatically generate sitemap.xml
 - 📦 Expansion Pack — Easily install common libraries, additional components, and configs.
 
-## Tailwind CSS Version
-
-This starter is original from theodorusclarence/ts-nextjs-tailwind-starter, thank you theodorusclarence! If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter)
-
 ## Getting Started
 
-### 1. Clone this template using one of a few ways
+### 1. Clone this repo
 
-1. Test locally: Using `create-next-app`
-
-   ```bash
-   npx create-next-app -e https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter new-project-name
-   ```
-
-2. Test online: Deploy to Vercel by one click
-
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2FAlexStack%2Fnextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter&showOptionalTeamCreation=false)
+```
+git clone https://github.com/dzaky-pr/mini-project-supabase-dashboard.git
+```
 
 ### 2. Install dependencies
 
@@ -97,7 +81,7 @@ Don't forget to change the package name in package.json
 
 This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
 
-### Format
+## Format
 
 `<type>(optional scope): <description>`
 Example: `feat(pre-event): add speakers section`
@@ -137,29 +121,3 @@ Add BREAKING CHANGE in the description if there is a significant change.
 - Use imperative, and present tense: "change" not "changed" or "changes"
 - Don't use capitals in front of the sentence
 - Don't add full stop (.) at the end of the sentence
-
-## Projects using this starter
-
-<!--
-TEMPLATE
-- [sitename](https://sitelink.com) ([Source](https://github.com/githublink))
-- [sitename](https://sitelink.com)
--->
-
-- [HiHB](https://hihb.com/)
-
-Are you using this starter? Please add your page (and repo) to the end of the list via a [Pull Request](https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter/edit/main/README.md). 😃
-
-## Folder structure
-
-![image of folder structure](https://raw.githubusercontent.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter/main/public/images/next-mui-folders.png)
-
-## app/page.tsx code example
-
-🚘🚘🚘 [**Click here to see an online demo of below code**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
-
-![app/page.tsx code example](https://raw.githubusercontent.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter/main/public/images/app-page-tsx.png)
-
-## License
-
-- MIT

@@ -1,23 +1,3 @@
-// import { redirect } from 'next/navigation';
-// import React, { ReactNode } from 'react';
-
-// import { readUserSession } from '@/app/(protected-page)/actions';
-
-// export default async function Layout({
-//   children,
-// }: {
-//   children: ReactNode;
-//   role: string;
-// }) {
-//   const { data: userSession } = await readUserSession();
-
-//   if (!userSession.session) {
-//     return redirect('/sign-in');
-//   }
-
-//   return <>{children}</>;
-// }
-
 import { redirect } from 'next/navigation';
 import React, { ReactNode } from 'react';
 

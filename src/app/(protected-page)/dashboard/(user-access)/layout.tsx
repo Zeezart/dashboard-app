@@ -1,3 +1,23 @@
+// import { redirect } from 'next/navigation';
+// import React, { ReactNode } from 'react';
+
+// import { readUserSession } from '@/app/(protected-page)/actions';
+
+// export default async function Layout({
+//   children,
+// }: {
+//   children: ReactNode;
+//   role: string;
+// }) {
+//   const { data: userSession } = await readUserSession();
+
+//   if (!userSession.session) {
+//     return redirect('/sign-in');
+//   }
+
+//   return <>{children}</>;
+// }
+
 import { redirect } from 'next/navigation';
 import React, { ReactNode } from 'react';
 
@@ -20,7 +40,7 @@ export default async function Dashboard({
   const { data: permissions } = await readAccess();
   const role = permissions.role;
 
-  if (role !== 'admin') {
+  if (role !== 'user') {
     return redirect('/not-found'); // Redirect if user is not an admin
   }
 

@@ -79,7 +79,7 @@ const DashboardSidebar = ({ role }: { role: string }) => {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Toko Buku Online
+          Buku Online
         </Typography>
       </Toolbar>
       <Divider />
