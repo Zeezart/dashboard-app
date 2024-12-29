@@ -9,13 +9,9 @@
 
 <div align="center">
   <h2>Next Js 14.x + MUI 5.x + TypeScript 4.x + Tailwind CSS 3.x + Supabase (auth & database) 2.x</h2>
-  <p>The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
-
-  <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, MUI confirmation dialog, Loading button, Client-side component & React Context update hook</p>
-
-🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
-
-If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter)
+  <p>
+    This is a mini project that creates a dashboard system with Role-Based Access Control (RBAC), data manipulation (CRUD), and authentication using Supabase. It provides a simple way to manage and control access to data, ensuring that users with different roles can interact with the system according to their permissions.
+  </p>
 
 </div>
 
