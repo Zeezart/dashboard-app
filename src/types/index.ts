@@ -11,3 +11,13 @@ export type IPermission = {
     email: string;
   };
 };
+
+export type UserMetadata = {
+  email: string;
+  email_verified: boolean;
+  full_name: string;
+  phone_verified: boolean;
+  sub: string;
+};
+
+export type Role = 'user' | 'admin';

@@ -1,5 +1,3 @@
-'use client';
-
 import { Logout } from '@mui/icons-material';
 import SyncIcon from '@mui/icons-material/Sync';
 import { Button } from '@mui/material';

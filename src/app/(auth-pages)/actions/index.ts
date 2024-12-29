@@ -2,13 +2,16 @@
 
 import { redirect } from 'next/navigation';
 
-import { createSupbaseServerClient } from '@/lib/supabase';
+import { createSupabaseClient } from '@/lib/supabase';
 
 export async function loginWithEmailAndPassword(data: {
   email: string;
   password: string;
 }) {
-  const supabase = await createSupbaseServerClient();
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
 
   // Login dengan email dan password
   const result = await supabase.auth.signInWithPassword(data);
@@ -27,7 +30,10 @@ export async function signUpWithEmailAndPassword(data: {
   password: string;
   full_name: string;
 }) {
-  const supabase = await createSupbaseServerClient();
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
 
   const result = await supabase.auth.signUp({
     email: data.email,
@@ -48,7 +54,10 @@ export async function signUpWithEmailAndPassword(data: {
 }
 
 export async function logout() {
-  const supabase = await createSupbaseServerClient();
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
   await supabase.auth.signOut();
   redirect('/sign-in');
 }

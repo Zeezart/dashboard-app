@@ -1,20 +1,10 @@
-'use server';
-
-import { User, UserMetadata } from '@supabase/supabase-js';
+import { User } from '@supabase/supabase-js';
 import { create } from 'zustand';
 
-interface UserSession {
+interface UserState {
   user: User | null;
-  userMetadata: UserMetadata | null;
-  permissionsRole: string | null;
-  setUserSession: (userMetadata: UserMetadata) => void;
-  setPermissionsRole: (role: string) => void;
 }
 
-export const useUserStore = create<UserSession>((set) => ({
+export const useUserStore = create<UserState>()((_set) => ({
   user: null,
-  userMetadata: null,
-  permissionsRole: null,
-  setUserSession: (userMetadata) => set({ userMetadata }),
-  setPermissionsRole: (role) => set({ permissionsRole: role }),
 }));
