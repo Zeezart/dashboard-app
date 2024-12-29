@@ -1,6 +1,8 @@
-import { VerifiedUser } from '@mui/icons-material';
-import BookIcon from '@mui/icons-material/Book';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import GroupsIcon from '@mui/icons-material/Groups';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   ListItem,
   ListItemButton,
@@ -22,30 +24,30 @@ const DashboardSidebar = ({ role }: { role: string }) => {
   const menuItems = [
     {
       label: 'Dashboard',
-      icon: <DashboardIcon />,
+      icon: <LibraryBooksIcon />,
       link: '/dashboard',
     },
     {
       label: 'My Books',
-      icon: <BookIcon />,
+      icon: <BookmarkAddedIcon />,
       link: '/dashboard/my-books',
       role: 'user',
     },
     {
       label: 'User Order',
-      icon: <BookIcon />,
+      icon: <ShoppingCartIcon />,
       link: '/dashboard/user-order',
       role: 'admin',
     },
     {
       label: 'All User',
-      icon: <VerifiedUser />,
+      icon: <GroupsIcon />,
       link: '/dashboard/all-user',
       role: 'admin',
     },
     {
       label: 'My Profile',
-      icon: <DashboardIcon />,
+      icon: <AccountBoxIcon />,
       link: '/dashboard/my-profile',
     },
   ];

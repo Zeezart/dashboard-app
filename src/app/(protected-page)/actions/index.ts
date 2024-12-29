@@ -4,6 +4,8 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 import { createSupabaseAdmin, createSupabaseClient } from '@/lib/supabase';
 
+import { Book } from '@/types';
+
 export async function readUserSession() {
   noStore();
   const supabase = await createSupabaseClient({
@@ -64,4 +66,23 @@ export async function readAllBooks() {
   }
 
   return books;
+}
+
+export async function bookDetailById(book_id: string): Promise<Book | null> {
+  const supabase = await createSupabaseClient({
+    readOnly: true,
+    isBrowser: false,
+  });
+
+  const { data, error } = await supabase
+    .from('books')
+    .select('*')
+    .eq('book_id', book_id)
+    .single(); // single record!
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
 }
