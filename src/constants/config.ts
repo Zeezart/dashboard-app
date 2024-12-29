@@ -1,12 +1,7 @@
 export const SITE_CONFIG = {
-  title: 'NextJs 14.x + MUI 5.x + TypeScript Starter',
+  title: 'Dashboard Buku Online',
   description:
-    'The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky',
+    ' This is a mini project that creates a dashboard system with Role-Based Access Control (RBAC), data manipulation (CRUD), and authentication using Supabase. It provides a simple way to manage and control access to data, ensuring that users with different roles can interact with the system according to their permissions.',
   /** Without additional '/' on the end, e.g. https://hihb.com */
-  url: 'https://hihb.com',
+  url: 'https://dzakyrifai.vercel.app/',
 };
-
-export const HIDE_DEBUG_ARY = [
-  // 'getApiResponse',
-  'getMongoDbApiData',
-];

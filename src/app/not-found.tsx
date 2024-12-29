@@ -1,7 +1,6 @@
-import { Box } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { Metadata } from 'next';
 import * as React from 'react';
-// import { RiAlarmWarningFill } from 'react-icons/ri';
 
 export const metadata: Metadata = {
   title: 'Not Found',
@@ -10,16 +9,49 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main>
-      <Box sx={{ textAlign: 'center' }}>
-        <div className='layout flex min-h-screen flex-col items-center justify-center text-center text-black'>
-          {/* <RiAlarmWarningFill
-            size={60}
-            className='drop-shadow-glow animate-flicker text-red-500'
-          /> */}
-          <h1>Page Not Found</h1>
-          <h5>change this in app/not-found.tsx</h5>
-          <a href='/'>Back to home</a>
-        </div>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          textAlign: 'center',
+          backgroundColor: 'background.paper',
+          padding: 3,
+        }}
+      >
+        <Typography
+          variant='h1'
+          sx={{
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            color: 'error.main',
+            marginBottom: 2,
+          }}
+        >
+          404 - Page Not Found
+        </Typography>
+        <Typography
+          variant='h5'
+          sx={{
+            marginBottom: 3,
+            color: 'text.secondary',
+          }}
+        >
+          Oops! The page you're looking for doesn't exist.
+        </Typography>
+        <Button
+          variant='contained'
+          color='primary'
+          href='/'
+          sx={{
+            padding: '10px 20px',
+            textTransform: 'none',
+          }}
+        >
+          Back to Home
+        </Button>
       </Box>
     </main>
   );
