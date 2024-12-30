@@ -5,7 +5,7 @@ export default function UserOrderPage() {
   return (
     <>
       <Typography variant='h4' gutterBottom>
-        User Order
+        My Order
       </Typography>
       <Typography variant='h4' gutterBottom>
         change this

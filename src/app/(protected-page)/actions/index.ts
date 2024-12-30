@@ -112,6 +112,7 @@ export async function addBook(data: {
   title: string;
   author: string;
   description: string;
+  stocks: number;
 }) {
   const supabase = await createSupabaseClient({
     isBrowser: false,
@@ -122,6 +123,7 @@ export async function addBook(data: {
     title: data.title,
     author: data.author,
     description: data.description,
+    stocks: data.stocks,
   });
 
   if (result.error) {
@@ -136,6 +138,7 @@ export async function updateBook(
     title: string;
     author: string;
     description: string;
+    stocks: number;
   },
   book_id: string
 ) {
@@ -150,6 +153,7 @@ export async function updateBook(
       title: data.title,
       author: data.author,
       description: data.description,
+      stocks: data.stocks,
     })
     .eq('book_id', book_id);
 

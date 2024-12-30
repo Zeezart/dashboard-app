@@ -5,6 +5,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Chip,
   Grid,
   Typography,
 } from '@mui/material';
@@ -54,8 +55,24 @@ export default async function BooksListPage() {
                   alt={book.title}
                 />
                 <CardContent>
-                  <Typography variant='h6' noWrap>
-                    {book.title}
+                  <Chip
+                    label={
+                      book.stocks === 0
+                        ? 'Sold Out!'
+                        : book.stocks <= 10
+                        ? 'Low Stock!'
+                        : 'Ready Stock!'
+                    }
+                    color={
+                      book.stocks === 0
+                        ? 'error'
+                        : book.stocks <= 10
+                        ? 'warning'
+                        : 'primary'
+                    }
+                  />
+                  <Typography variant='h6' noWrap mt={1}>
+                    {book.title}{' '}
                   </Typography>
                   <Typography variant='body2' color='textSecondary'>
                     {book.author}
@@ -93,6 +110,7 @@ export default async function BooksListPage() {
                       initial_title={book.title}
                       initial_author={book.author}
                       initial_description={book.description}
+                      initial_stocks={book.stocks}
                     />
                     <DeleteBookButton
                       book_id={book.book_id}

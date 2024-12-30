@@ -24,6 +24,10 @@ const bookSchema = z.object({
   description: z
     .string()
     .min(10, { message: 'Description must be at least 10 characters' }),
+  stocks: z
+    .number()
+    .int({ message: 'Stock must be an integer' })
+    .min(0, { message: 'Stock cannot be negative' }),
 });
 
 type BookFormData = z.infer<typeof bookSchema>;
@@ -109,6 +113,15 @@ export default function AddBookButton() {
               error={!!errors.description}
               helperText={errors.description?.message}
               {...register('description')}
+            />
+            <TextField
+              margin='dense'
+              label='Stock'
+              fullWidth
+              type='number'
+              error={!!errors.stocks}
+              helperText={errors.stocks?.message}
+              {...register('stocks', { valueAsNumber: true })}
             />
             <DialogActions>
               <Button onClick={handleClose} color='primary'>

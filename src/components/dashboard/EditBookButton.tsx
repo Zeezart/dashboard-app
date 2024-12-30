@@ -25,6 +25,10 @@ const bookSchema = z.object({
   description: z
     .string()
     .min(10, { message: 'Description must be at least 10 characters' }),
+  stocks: z
+    .number()
+    .int({ message: 'Stock must be an integer' })
+    .min(0, { message: 'Stock cannot be negative' }),
 });
 
 type BookFormData = z.infer<typeof bookSchema>;
@@ -34,6 +38,7 @@ interface EditBookProps {
   initial_title: string;
   initial_author: string;
   initial_description: string;
+  initial_stocks: number;
 }
 
 export default function EditBookButton({
@@ -41,12 +46,14 @@ export default function EditBookButton({
   initial_title,
   initial_author,
   initial_description,
+  initial_stocks,
 }: EditBookProps) {
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false); // State to manage dialog open/close
   const [title, setTitle] = useState(initial_title);
   const [author, setAuthor] = useState(initial_author);
   const [description, setDescription] = useState(initial_description);
+  const [stocks, setStocks] = useState(initial_stocks);
   const router = useRouter();
 
   const {
@@ -63,7 +70,8 @@ export default function EditBookButton({
     setValue('title', title);
     setValue('author', author);
     setValue('description', description);
-  }, [title, author, description, setValue]);
+    setValue('stocks', stocks);
+  }, [title, author, description, stocks, setValue]);
 
   const handleClickOpen = () => {
     setOpen(true); // Open the modal
@@ -133,6 +141,15 @@ export default function EditBookButton({
               error={!!errors.description}
               helperText={errors.description?.message}
               {...register('description')}
+            />
+            <TextField
+              margin='dense'
+              label='Stock'
+              fullWidth
+              type='number'
+              error={!!errors.stocks}
+              helperText={errors.stocks?.message}
+              {...register('stocks', { valueAsNumber: true })}
             />
             <DialogActions>
               <Button onClick={handleClose} color='primary'>

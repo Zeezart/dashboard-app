@@ -16,7 +16,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 
-import SignOut from '@/components/shared/SignOut';
+import SignOut from '@/components/auth/SignOut';
 
 const drawerWidth = 240;
 
@@ -28,9 +28,15 @@ const DashboardSidebar = ({ role }: { role: string }) => {
       link: '/dashboard',
     },
     {
-      label: 'My Books',
+      label: 'My Favorite Books',
       icon: <BookmarkAddedIcon />,
-      link: '/dashboard/my-books',
+      link: '/dashboard/my-favorite-books',
+      role: 'user',
+    },
+    {
+      label: 'My Order',
+      icon: <ShoppingCartIcon />,
+      link: '/dashboard/my-order',
       role: 'user',
     },
     {
