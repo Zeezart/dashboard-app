@@ -56,7 +56,7 @@ export default function AddBookButton() {
         if (result.error) {
           toast.error(result.error);
         } else {
-          router.push('/dashboard'); // Redirect to dashboard after adding book
+          router.refresh(); // Redirect to dashboard after adding book
           toast.success('Book added successfully');
         }
       });

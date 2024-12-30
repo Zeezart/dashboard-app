@@ -43,9 +43,9 @@ export default function AddFavoriteBookButton({
         if (result.error) {
           toast.error(result.error);
         } else {
+          router.refresh();
           toast.success('Book added to favorites successfully!');
           setIsFavorite(true); // Update the status to "favorite"
-          router.refresh();
         }
       });
     } catch (error) {

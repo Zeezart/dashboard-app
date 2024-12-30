@@ -38,15 +38,20 @@ export async function readAllUsers() {
     readOnly: false,
   });
 
-  // Query the all_users view to fetch user data with pagination
+  // Fetch users and sort by created_at
   const allUserData = await supabaseAdmin.auth.admin.listUsers();
 
   if (allUserData.error) {
-    // Properly handle the error
     throw new Error(allUserData.error.message);
   }
 
-  return allUserData;
+  // Sort the users by created_at
+  const sortedUsers = allUserData.data.users.sort(
+    (a, b) =>
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
+
+  return { ...allUserData, data: { ...allUserData.data, users: sortedUsers } };
 }
 
 export async function readAllBooks() {

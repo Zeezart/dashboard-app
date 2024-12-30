@@ -1,9 +1,12 @@
-# To Do
+# To Do (It will be removed once completed)
 
 - [] Signup Cookies are not deleted after signup.
 - [] The verify email callback is not following best practices.
 - [] Implementing Supabase Auth Best Practices for Server and Client (Create Action).
 - [] Fix middleware for checking authentication and authorization (permission/role).
+- [] Check out feature (multiple order).
+- [] Pagination feature.
+- [] High Ordered Component implementation (?).
 
 # Mini Project Sistem Dashboard Buku
 

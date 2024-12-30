@@ -80,7 +80,7 @@ export default function EditBookButton({
         if (result.error) {
           toast.error(result.error);
         } else {
-          router.push('/dashboard'); // Redirect to dashboard after updating book
+          router.refresh(); // Redirect to dashboard after updating book
           toast.success('Book updated successfully');
         }
       });

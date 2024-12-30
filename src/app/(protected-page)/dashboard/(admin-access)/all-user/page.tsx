@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import React from 'react';
 
+import { formatDateTime } from '@/lib/utils';
+
 import { readAllUsers } from '@/app/(protected-page)/actions';
 
 export default async function AllUsersPage() {
@@ -37,6 +39,7 @@ export default async function AllUsersPage() {
           <TableHead>
             <TableRow>
               <TableCell>Number</TableCell>
+              <TableCell>Create Account At</TableCell>
               <TableCell>Full Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>ID</TableCell>
@@ -48,10 +51,13 @@ export default async function AllUsersPage() {
             {users?.map((user, index) => (
               <TableRow key={user.id}>
                 <TableCell>{index + 1}</TableCell>
+                <TableCell>{formatDateTime(user.created_at)}</TableCell>
                 <TableCell>{user.user_metadata.full_name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.id}</TableCell>
-                <TableCell>{user.last_sign_in_at}</TableCell>
+                <TableCell>
+                  {formatDateTime(user.last_sign_in_at || '')}
+                </TableCell>
                 <TableCell>{user.app_metadata.provider}</TableCell>
               </TableRow>
             ))}

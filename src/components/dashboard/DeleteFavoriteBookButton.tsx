@@ -39,7 +39,7 @@ export default function DeleteFavoriteBookButton({
         if (result.error) {
           toast.error(result.error);
         } else {
-          router.push('/dashboard'); // Redirect to dashboard after deletion
+          router.refresh(); // Redirect to dashboard after deletion
           toast.success('Book deleted successfully');
         }
       });
