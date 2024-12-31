@@ -7,6 +7,7 @@
 - [] Check out feature (multiple order).
 - [] Pagination feature.
 - [] High Ordered Component implementation (?).
+- [] Order feature with realtime rajaongkir API for provinces, cities, and cost.
 
 # Mini Project Sistem Dashboard Buku
 
