@@ -1,4 +1,5 @@
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
+import RemoveShoppingCartRoundedIcon from '@mui/icons-material/RemoveShoppingCartRounded';
 import {
   Box,
   Button,
@@ -55,7 +56,7 @@ export default async function BookDetailsPage({
       <CardMedia
         className='mt-4'
         component='img'
-        image='https://via.placeholder.com/200x200.png?text=Book+Cover'
+        image='/images/book_cover.jpg'
         alt={book.title}
         sx={{ width: '200px', height: '260px', objectFit: 'cover' }}
       />
@@ -91,8 +92,23 @@ export default async function BookDetailsPage({
           }
         />
       </Box>
-      <Box className='flex flex-col space-y-4 w-fit '>
-        {role === 'user' && <OrderBookButton book_id={book_id} />}
+      <Box className='flex flex-col space-y-4 w-fit'>
+        {role === 'user' && (
+          <>
+            {book?.stocks === 0 ? (
+              <Button
+                startIcon={<RemoveShoppingCartRoundedIcon />}
+                variant='contained'
+                color='secondary'
+                disabled
+              >
+                Sold Out!
+              </Button>
+            ) : (
+              <OrderBookButton book_title={book?.title} book_id={book_id} />
+            )}
+          </>
+        )}
       </Box>
     </CardContent>
   );

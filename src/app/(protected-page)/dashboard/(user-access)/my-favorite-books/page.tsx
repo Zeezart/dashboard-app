@@ -40,7 +40,7 @@ export default async function FavoriteBooksPage() {
                   <CardMedia
                     component='img'
                     height='140'
-                    image='https://via.placeholder.com/200x200.png?text=Book+Cover'
+                    image='/images/book_cover.jpg'
                     alt={item.books.title || 'Book Cover'}
                   />
                   <CardContent>

@@ -195,7 +195,7 @@ export async function isFavoriteBook(book_id: string) {
     .single();
 
   if (error) {
-    // Handle unexpected errors, ignore "no rows found" error
+    // Handle unexpected errors, return false
     return false;
   }
 
@@ -243,6 +243,44 @@ export async function deleteUserFavoriteBook(book_id: string) {
     .from('favorites')
     .delete()
     .eq('book_id', book_id);
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
+  return result;
+}
+
+export async function orderSingleBook(data: {
+  book_id: string;
+  count: number;
+  shipping_address: string;
+  city: string;
+  province: string;
+  courier: string;
+  service: string;
+  shipping_cost: number;
+  delivery_estimate: string;
+  total_price: number;
+}) {
+  const supabase = await createSupabaseClient({
+    isBrowser: false,
+    readOnly: false,
+  });
+
+  const result = await supabase.from('orders').insert({
+    book_id: data.book_id,
+    user_id: (await supabase.auth.getSession()).data.session?.user.id, // Ambil user ID dari sesi
+    count: data.count,
+    shipping_address: data.shipping_address,
+    city: data.city,
+    province: data.province,
+    courier: data.courier,
+    service: data.service,
+    shipping_cost: data.shipping_cost,
+    delivery_estimate: data.delivery_estimate,
+    total_price: data.total_price, // Total harga (termasuk pengiriman)
+  });
 
   if (result.error) {
     throw new Error(result.error.message);

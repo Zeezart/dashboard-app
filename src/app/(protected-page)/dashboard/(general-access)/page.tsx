@@ -51,7 +51,7 @@ export default async function BooksListPage() {
                 <CardMedia
                   component='img'
                   height='140'
-                  image='https://via.placeholder.com/200x200.png?text=Book+Cover'
+                  image='/images/book_cover.jpg'
                   alt={book.title}
                 />
                 <CardContent>

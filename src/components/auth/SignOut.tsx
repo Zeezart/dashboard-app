@@ -21,10 +21,12 @@ export default function SignOut() {
   const handleSignOut = () => {
     startTransition(async () => {
       try {
+        handleClose(); // Close the dialog before logging out
         await logout();
         toast.success('You have been logged out.');
         setOpen(false); // Close the dialog after logout
       } catch (error) {
+        handleClose(); // Close the dialog on error
         toast.error('Failed to log out.');
       }
     });
