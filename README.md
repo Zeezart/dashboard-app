@@ -81,6 +81,122 @@ Don't forget to change the package name in package.json
 
 This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
 
+## Supabase Detail
+
+### Database Schema
+
+> **Note**: The order feature, database schema, and everything related to this feature, both for admins and users, are still under development!
+
+![Database Schema](./public/images/database_schema.png)
+
+#### favorites
+
+This table stores data about books that users like.
+
+- **favorite_id (UUID)**: Unique ID for each favorite.
+- **user_id (UUID)**: ID of the user who likes the book.
+- **book_id (UUID)**: ID of the liked book.
+- **created_at (timestamptz)**: Time when the favorite was created.
+
+#### orders
+
+This table stores data about book orders from users.
+
+- **order_id (UUID)**: Unique ID for each order.
+- **user_id (UUID)**: ID of the user who placed the order.
+- **book_id (UUID)**: ID of the ordered book.
+- **count (int4)**: Number of books ordered.
+- **shipping_address (text)**: Shipping address.
+- **city (text)**: Shipping city.
+- **province (text)**: Shipping province.
+- **status (text)**: Order status.
+- **rejected_reason (text)**: Reason for rejection if the order is rejected.
+- **created_at (timestamptz)**: Time when the order was created.
+- **accepted_rejected_status_at (timestamptz)**: Time when the order was accepted or rejected.
+- **courier (text)**: Courier name.
+- **service (text)**: Shipping service type.
+- **shipping_cost (int4)**: Shipping cost.
+- **delivery_estimate (text)**: Estimated delivery time.
+- **total_price (int4)**: Total order price.
+
+#### books
+
+This table stores data about available books.
+
+- **book_id (UUID)**: Unique ID for each book.
+- **title (text)**: Book title.
+- **author (text)**: Book author.
+- **description (text)**: Book description.
+- **created_at (timestamptz)**: Time when the book was added.
+- **stocks (int4)**: Number of books available in stock.
+
+#### permissions
+
+This table stores data about user permissions.
+
+- **id (UUID)**: Unique ID for each permission entry.
+- **created_at (timestamptz)**: Time when the permission was created.
+- **role (text)**: User role (e.g., admin, user).
+
+### Functions
+
+#### create_user_on_signup
+
+This function is triggered when a user signs up. It inserts a new permission entry with the user's ID.
+
+```sql
+BEGIN
+  INSERT INTO public.permissions (id)
+  VALUES (
+    NEW.id
+  );
+  RETURN NEW;
+END;
+```
+
+#### is_admin
+
+This function checks if a user is an admin. It returns `true` if the user's role is 'admin'.
+
+```sql
+BEGIN
+  RETURN (SELECT role FROM permissions WHERE permissions.id = (SELECT auth.uid())) = 'admin';
+END;
+```
+
+#### is_user
+
+This function checks if a user is a regular user. It returns `true` if the user's role is 'user'.
+
+```sql
+BEGIN
+  RETURN (SELECT role FROM permissions WHERE permissions.id = (SELECT auth.uid())) = 'user';
+END;
+```
+
+#### update_status_timestamp
+
+This function updates the `accepted_rejected_status_at` timestamp when the order status changes.
+
+```sql
+BEGIN
+  IF NEW.status IS DISTINCT FROM OLD.status THEN
+    NEW.accepted_rejected_status_at := CURRENT_TIMESTAMP;
+  END IF;
+  RETURN NEW;
+END;
+```
+
+### Triggers
+
+#### create_user_on_signup
+
+This trigger is activated when a user signs up and calls the `create_user_on_signup` function.
+
+#### update_status_timestamp
+
+This trigger is activated after an update on the orders table and calls the
+
 ## Format
 
 `<type>(optional scope): <description>`
@@ -121,3 +237,9 @@ Add BREAKING CHANGE in the description if there is a significant change.
 - Use imperative, and present tense: "change" not "changed" or "changes"
 - Don't use capitals in front of the sentence
 - Don't add full stop (.) at the end of the sentence
+
+## References
+
+This project is built using the boilerplate starter template from the following repository:
+
+- [Next.js Materia MUI TypeScript Hook Form Scaffold Boilerplate Starter](https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter)
